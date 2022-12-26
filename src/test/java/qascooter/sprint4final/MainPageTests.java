@@ -41,7 +41,7 @@ public class MainPageTests extends TestBase {
      **/
     @Test
     public void questionsAnswersTextTest() {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(TestBase.driver);
         mainPage.closeConfirmCookiesBlock();
         mainPage.accordionButtonClick(accordionNumber);
         String actualText = mainPage.getAccordionPanelText(accordionNumber);

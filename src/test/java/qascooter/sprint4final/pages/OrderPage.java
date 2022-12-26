@@ -19,7 +19,9 @@ public class OrderPage {
     private By orderingPeriodInput = By.className("Dropdown-arrow");
     private By commentInput = By.xpath("//input[@placeholder = 'Комментарий для курьера']");
     private By nextStepButton = By.xpath("//button[@class ='Button_Button__ra12g Button_Middle__1CSJM']");
-    private By orderPopupInput = By.className("Order_Modal__YZ-d3");
+    private By orderPopupWindow = By.className("Order_Modal__YZ-d3");
+    private By orderPopupWindowHeader = By.className("Order_ModalHeader__3FDaJ");
+    private String orderPopupText = "Хотите оформить заказ?\n ";
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
@@ -34,10 +36,11 @@ public class OrderPage {
     }
 
     public void orderPopupIsEnabled() {
-        WebElement element = driver.findElement(orderPopupInput);
+        WebElement element = driver.findElement(orderPopupWindow);
         //scroll to popup window
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        Assert.assertTrue(driver.findElement(orderPopupInput).isEnabled());
+        Assert.assertTrue(driver.findElement(orderPopupWindow).isEnabled());
+        Assert.assertTrue(driver.findElement(orderPopupWindowHeader).getText().equals(orderPopupText));
     }
 
     public void setFieldsInOrderWindow(String firstName, String lastName, String address, String metroStation, String phoneNumber, String date, String orderingPeriod, String color, String comment) {

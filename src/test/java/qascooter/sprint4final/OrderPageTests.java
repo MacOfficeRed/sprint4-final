@@ -15,10 +15,10 @@ public class OrderPageTests extends TestBase {
     private final String phoneNumber;
     private final String date;
     private final String orderingPeriod;
-    private final String colorSet;
-    private final String commentSet;
+    private final String color;
+    private final String comment;
 
-    public OrderPageTests(String firstName, String lastName, String address, String metroStation, String phoneNumber, String date, String orderingPeriod, String colorSet, String commentSet) {
+    public OrderPageTests(String firstName, String lastName, String address, String metroStation, String phoneNumber, String date, String orderingPeriod, String color, String comment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -26,8 +26,8 @@ public class OrderPageTests extends TestBase {
         this.phoneNumber = phoneNumber;
         this.date = date;
         this.orderingPeriod = orderingPeriod;
-        this.colorSet = colorSet;
-        this.commentSet = commentSet;
+        this.color = color;
+        this.comment = comment;
     }
 
     @Parameterized.Parameters
@@ -42,31 +42,39 @@ public class OrderPageTests extends TestBase {
     }
 
     @Test
-    /*
-    Test-case:
+    /**
+     Test-case:
      1. Open main page 'qa-scooter'
      2. Close 'Confirm cookies' block
      3. Click on the top button 'Order'
      4. Set all order fields
-     5.
-     */
+     5. Check that orderPopup window is visible and contains expected text
+     **/
     public void orderTestUsingTopButton() {
-        MainPage mainPage = new MainPage(driver);
-        OrderPage orderPage = new OrderPage(driver);
+        MainPage mainPage = new MainPage(TestBase.driver);
+        OrderPage orderPage = new OrderPage(TestBase.driver);
         mainPage.closeConfirmCookiesBlock();
         mainPage.orderTopButtonClick();
-        orderPage.setFieldsInOrderWindow(firstName, lastName, address, metroStation, phoneNumber, date, orderingPeriod, colorSet, commentSet);
+        orderPage.setFieldsInOrderWindow(firstName, lastName, address, metroStation, phoneNumber, date, orderingPeriod, color, comment);
         orderPage.clickNextStepOrder();
         orderPage.orderPopupIsEnabled();
     }
 
     @Test
+    /**
+     Test-case:
+     1. Open main page 'qa-scooter'
+     2. Close 'Confirm cookies' block
+     3. Click on the bottom button 'Order'
+     4. Set all order fields
+     5. Check that orderPopup window is visible and contains expected text
+     **/
     public void orderTestUsingBottomButton() {
-        MainPage mainPage = new MainPage(driver);
-        OrderPage orderPage = new OrderPage(driver);
+        MainPage mainPage = new MainPage(TestBase.driver);
+        OrderPage orderPage = new OrderPage(TestBase.driver);
         mainPage.closeConfirmCookiesBlock();
         mainPage.orderBottomButtonClick();
-        orderPage.setFieldsInOrderWindow(firstName, lastName, address, metroStation, phoneNumber, date, orderingPeriod, colorSet, commentSet);
+        orderPage.setFieldsInOrderWindow(firstName, lastName, address, metroStation, phoneNumber, date, orderingPeriod, color, comment);
         orderPage.clickNextStepOrder();
         orderPage.orderPopupIsEnabled();
     }
